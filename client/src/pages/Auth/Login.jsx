@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import AuthLayout from "../../components/layout/AuthLayout";
 import Input from "../../components/Input";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [email, setEmail] = useState("");
+  const navigator = useNavigate();
   return (
     <AuthLayout>
       <div className="grid grid-cols-1 justify-center items-center">
@@ -23,9 +25,18 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
           <div className="grid justify-center items-center">
-            <button className=" px-8 py-3 bg-blue-200 rounded-2xl text-lg font-semibold  hover:bg-blue-600 hover:text-white transition-all duration-300 ease-in-out">
+            <button className="mb-2 px-8 py-3 bg-blue-200 rounded-2xl text-lg font-semibold  hover:bg-blue-600 hover:text-white transition-all duration-300 ease-in-out">
               Login
             </button>
+            <p>
+              Already have a Account ?
+              <span
+                onClick={() => navigator("/register")}
+                className="text-blue-400 hove:text-blue-700 hover:underline"
+              >
+                Sign Up
+              </span>
+            </p>
           </div>
         </form>
       </div>
