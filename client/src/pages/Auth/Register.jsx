@@ -1,13 +1,40 @@
 import React from "react";
 import AuthLayout from "../../components/layout/AuthLayout";
+import { validEmail } from "../../helper.js/validation.js";
 import Input from "../../components/Input";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 const Register = () => {
   const navigator = useNavigate();
   const [FullName, setFullName] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
+  const [Error, setError] = useState("");
+  const handleRegister = (e) => {
+    e.preventDefault();
+    if (!FullName) return setError("Please Enter Your Name");
+    if (!Email) return setError("Please Enter Email");
+    if (!validEmail(Email)) return setError("Please Enter A Valid Email");
+    if (!Password) return setError("Please Enter A Password");
+    axios
+      .post("http://localhost:8000/auth/register", {
+        FullName,
+        Email,
+        Password,
+      })
+      .then((res) => {
+        console.log(res.data);
+        alert(res.data.message);
+        navigator("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.response.data.message === "User is already existed") {
+          setError("User is already Registered " + "Go to login");
+        }
+      });
+  };
   return (
     <AuthLayout>
       <div className="grid grid-cols-1 justify-center items-center">
@@ -37,7 +64,12 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <div className="grid justify-center items-center">
-            <button className="mb-2 px-8 py-3 bg-blue-200 rounded-2xl text-lg font-semibold  hover:bg-blue-600 hover:text-white transition-all duration-300 ease-in-out">
+            {Error ? <p className="text-xl text-red-500">{Error}</p> : <></>}
+            <button
+              type="submit"
+              onClick={handleRegister}
+              className="mb-2 px-8 py-3 bg-blue-200 rounded-2xl text-lg font-semibold  hover:bg-blue-600 hover:text-white transition-all duration-300 ease-in-out"
+            >
               Sign Up
             </button>
             <p>
