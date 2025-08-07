@@ -14,8 +14,8 @@ const AuthLayout = ({ children }) => {
         </div>
       </div>
       <div className="flex justify-center items-center">
-        <div className="grid items-center justify-center mb-4">
-          <h2 className="flex justify-center text-3xl text-cyan-700">
+        <div className="grid items-center justify-center ">
+          <h2 className="flex justify-center text-3xl text-cyan-700 mb-6">
             Expense Tracker
           </h2>
           {children}

@@ -5,7 +5,8 @@ import Register from "./pages/Auth/Register";
 const App = () => {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<Login />} />
+      {/* Default Router */}
       <Route path="/register" element={<Register />} />
     </Routes>
   );

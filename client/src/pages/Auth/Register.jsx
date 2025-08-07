@@ -2,32 +2,39 @@ import React from "react";
 import AuthLayout from "../../components/layout/AuthLayout";
 import Input from "../../components/Input";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 const Register = () => {
   const navigator = useNavigate();
+  const [FullName, setFullName] = useState("");
+  const [Email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
   return (
     <AuthLayout>
       <div className="grid grid-cols-1 justify-center items-center">
-        <div className="grid justify-center items-center">
-          <h2 className="text-2xl text-blue-500 font-bold mb-8">Register</h2>
-        </div>
         <form className="border-2 border-blue-600 max-w-90 m-auto px-4 py-6 rounded-2xl">
+          <div className="grid justify-center items-center">
+            <h2 className="text-2xl text-blue-500 font-bold">Register</h2>
+          </div>
           <Input
             label={"Full Name"}
+            value={FullName}
             placeholder={"John Wick"}
             type={"text"}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setFullName(e.target.value)}
           />
           <Input
             label={"Email"}
+            value={Email}
             placeholder={"Your@gmail.com"}
             type={"email"}
             onChange={(e) => setEmail(e.target.value)}
           />
           <Input
             label={"Password"}
+            value={Password}
             placeholder={"**********"}
             type={"password"}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <div className="grid justify-center items-center">
             <button className="mb-2 px-8 py-3 bg-blue-200 rounded-2xl text-lg font-semibold  hover:bg-blue-600 hover:text-white transition-all duration-300 ease-in-out">
@@ -36,7 +43,7 @@ const Register = () => {
             <p>
               Already have a Account ?
               <span
-                onClick={() => navigator("/login")}
+                onClick={() => navigator("/")}
                 className="text-blue-400 hove:text-blue-700 hover:underline"
               >
                 login

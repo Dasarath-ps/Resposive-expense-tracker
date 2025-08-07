@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { LuEye, LuEyeClosed } from "react-icons/lu";
 
-const Input = ({ label, type, placeholder, onChange }) => {
+const Input = ({ label, value, type, placeholder, onChange }) => {
   const [showPassword, setShowPassword] = useState(false);
-  console.log(showPassword);
+  //console.log(showPassword);
 
   const togglePassword = (e) => {
     e.preventDefault();
@@ -18,6 +18,7 @@ const Input = ({ label, type, placeholder, onChange }) => {
           type={
             type === "password" ? (showPassword ? "text" : "password") : type
           }
+          value={value}
           placeholder={placeholder}
           onChange={onChange}
         />
