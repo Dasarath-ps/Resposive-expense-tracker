@@ -20,6 +20,7 @@ const Login = () => {
       .then((response) => {
         console.log(response.data);
         alert(response.data.message);
+        navigator("/dashboard");
       })
       .catch((err) => {
         console.log(("Error", err));
