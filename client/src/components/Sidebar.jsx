@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import { FaArrowLeft } from "react-icons/fa";
-
+import { NavLink } from "react-router-dom";
 const Sidebar = ({ ShowSidebar, setShowSidebar }) => {
   const handleSidebar = (e) => setShowSidebar((prev) => !prev);
   const menuRef = useRef();
@@ -9,8 +9,8 @@ const Sidebar = ({ ShowSidebar, setShowSidebar }) => {
   useEffect(() => {
     const handle = (e) => {
       if (ShowSidebar && !menuRef.current.contains(e.target)) {
-        setShowSidebar((prev) => !prev);
-        console.log(ShowSidebar);
+        setShowSidebar(false);
+        //console.log(ShowSidebar);
       }
     };
     document.addEventListener("mousedown", handle);
@@ -24,17 +24,39 @@ const Sidebar = ({ ShowSidebar, setShowSidebar }) => {
       ref={menuRef}
       className={`${
         ShowSidebar ? "translate-x-0" : "-translate-x-[280px] "
-      } w-[280px] h-screen bg-amber-300 absolute z-100 transition-all duration-500 ease-in-out `}
+      } border-r-4 border-blue-600 fixed w-[280px] h-screen bg-white z-[100] transition-all duration-500 ease-in-out `}
       onClick={(e) => e.stopPropagation()}
     >
-      <div
+      {/* <div
         onClick={handleSidebar}
-        className="flex justify-center items-center text-3xl rounded-full bg-white h-15 w-15 absolute right-0"
+        className="flex justify-center items-center text-3xl rounded-full bg-primary-alt h-15 w-15 absolute right-0 hover:text-white transition-all duration-300 ease-in-out"
       >
         <FaArrowLeft />
+      </div> */}
+      <div className="">
+        <SidebarItems path={"/dashboard"} val={"Home"} />
+        <SidebarItems path={"/income"} val={"Income"} />
+        <SidebarItems path={"/expenses"} val={"Expenses"} />
+        <SidebarItems path={"/logout"} val={"Logout"} />
       </div>
     </div>
   );
 };
 
 export default Sidebar;
+
+const SidebarItems = ({ path, val }) => {
+  return (
+    <NavLink
+      //className={`${isActive ? "text-blue-600" : ""}`}
+      className={({ isActive }) =>
+        `${isActive ? "text-blue-600 text-shadow-blue-600" : ""}`
+      }
+      to={path}
+    >
+      <div className="flex justify-center items-center h-[100px] font-semibold text-[20px] rounded-2xl hover:bg-light hover:text-[22px] hover:text-blue-600 transition-all duration-300 ease-in-out">
+        {val}
+      </div>
+    </NavLink>
+  );
+};

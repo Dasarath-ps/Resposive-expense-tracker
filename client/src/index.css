@@ -4,3 +4,15 @@
 body {
   font-family: Poppins;
 }
+
+@theme {
+  --color-primary: #1a1919;
+  --color-primary-alt: #514b4b;
+  --color-white: #fff;
+  --color-light: #ebe8e8;
+}
+/* .hai {
+  color: #514b4b;
+  color: #1a1919;
+  color: #ebe8e8;
+} */
