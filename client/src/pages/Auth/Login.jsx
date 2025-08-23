@@ -20,6 +20,7 @@ const Login = () => {
       .then((response) => {
         console.log(response.data);
         alert(response.data.message);
+        localStorage.setItem("token", response.data.token);
         navigator("/dashboard");
       })
       .catch((err) => {
@@ -35,9 +36,9 @@ const Login = () => {
   return (
     <AuthLayout>
       <div className="grid grid-cols-1 justify-center items-center">
-        <form className="border-2 border-blue-600 max-w-90 m-auto px-4 py-6 rounded-2xl">
-          <div className="grid justify-center items-center">
-            <h2 className="text-2xl text-blue-500 font-bold">Login</h2>
+        <form className="border-2 border-primary-blue min-w-70 m-4 px-4 py-6 rounded-2xl">
+          <div className="grid justify-center items-center ">
+            <h2 className="text-2xl font-bold text-white ">Login</h2>
           </div>
           <Input
             label={"Email"}
@@ -58,15 +59,15 @@ const Login = () => {
             <button
               type="submit"
               onClick={handleLogin}
-              className="mb-2 px-8 py-3 bg-blue-200 rounded-2xl text-lg font-semibold  hover:bg-blue-600 hover:text-white transition-all duration-300 ease-in-out"
+              className="mb-2 px-8 py-3 bg-primary-blue rounded-2xl text-lg font-semibold  hover:bg-white text-white hover:text-dark-grey transition-all duration-300 ease-in-out"
             >
               Login
             </button>
-            <p>
-              Already have a Account ?
+            <p className="text-white">
+              Create new Account
               <span
                 onClick={() => navigator("/register")}
-                className="text-blue-400 hove:text-blue-700 hover:underline"
+                className="text-primary-blue hover:underline"
               >
                 Sign Up
               </span>

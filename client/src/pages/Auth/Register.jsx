@@ -38,9 +38,9 @@ const Register = () => {
   return (
     <AuthLayout>
       <div className="grid grid-cols-1 justify-center items-center">
-        <form className="border-2 border-blue-600 max-w-90 m-auto px-4 py-6 rounded-2xl">
+        <form className="border-2 border-primary-blue min-w-90 m-auto px-4 py-6 rounded-2xl">
           <div className="grid justify-center items-center">
-            <h2 className="text-2xl text-blue-500 font-bold">Register</h2>
+            <h2 className="text-2xl text-white font-bold ">Register</h2>
           </div>
           <Input
             label={"Full Name"}
@@ -68,15 +68,15 @@ const Register = () => {
             <button
               type="submit"
               onClick={handleRegister}
-              className="mb-2 px-8 py-3 bg-blue-200 rounded-2xl text-lg font-semibold  hover:bg-blue-600 hover:text-white transition-all duration-300 ease-in-out"
+              className="mb-2 px-8 py-3 bg-primary-blue  rounded-2xl text-lg text-white font-semibold  hover:bg-white hover:text-dark-grey transition-all duration-300 ease-in-out"
             >
               Sign Up
             </button>
-            <p>
+            <p className="text-white">
               Already have a Account ?
               <span
                 onClick={() => navigator("/")}
-                className="text-blue-400 hove:text-blue-700 hover:underline"
+                className="text-primary-blue hove:text-blue-700 hover:underline"
               >
                 login
               </span>

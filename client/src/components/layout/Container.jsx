@@ -2,12 +2,12 @@ import React from "react";
 import Sidebar from "../Sidebar";
 import Navbar from "../Navbar";
 import { useState } from "react";
+
 const Container = ({ children }) => {
   const [ShowSidebar, setShowSidebar] = useState(true);
-  console.log(ShowSidebar);
   return (
     <div
-      className={`grid grid-cols-1 transition-all duration-600 ${
+      className={`bg-background grid grid-cols-1 transition-all duration-600 ${
         ShowSidebar ? "md:grid-cols-[280px_1fr]" : "md:grid-cols-1"
       } relative`}
     >

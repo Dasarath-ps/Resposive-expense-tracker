@@ -39,14 +39,25 @@ export const userLogin = async (req, res) => {
     const comparedPassword = await user.comparePassword(Password);
     if (!comparedPassword)
       return res.status(400).json({ message: "Incorect Password" });
-    res
-      .status(200)
-      .json({
-        token: generateToken(user._id),
-        user,
-        message: "Login Successfully.",
-      });
+    res.status(200).json({
+      token: generateToken(user._id),
+      user,
+      message: "Login Successfully.",
+    });
   } catch (error) {
     res.status(500).json({ error, message: "Catch Error" });
+  }
+};
+
+export const getUser = async (req, res, next) => {
+  try {
+    let token = req.header("Authorization").split(" ")[1];
+
+    if (!token) return res.status(400).json({ message: "no token is saved." });
+    const decoded = jsonwebtoken.verify(token, process.env.JWT_KEY);
+    req.user = await User.findById(decoded.id);
+    next();
+  } catch (error) {
+    return res.status(500).json({ message: "Error", error });
   }
 };

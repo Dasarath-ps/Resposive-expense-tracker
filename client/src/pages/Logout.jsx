@@ -1,7 +1,7 @@
 import React from "react";
-
+import Container from "../components/layout/Container";
 const Logout = () => {
-  return <div>Logout</div>;
+  return <Container>Logout</Container>;
 };
 
 export default Logout;

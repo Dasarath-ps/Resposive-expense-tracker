@@ -24,7 +24,7 @@ const Sidebar = ({ ShowSidebar, setShowSidebar }) => {
       ref={menuRef}
       className={`${
         ShowSidebar ? "translate-x-0" : "-translate-x-[280px] "
-      } border-r-4 border-blue-600 fixed w-[280px] h-screen bg-white z-[100] transition-all duration-500 ease-in-out `}
+      } bg-background border-r-3 border-primary-blue fixed w-[280px] h-screen  z-[100] transition-all duration-500 ease-in-out `}
       onClick={(e) => e.stopPropagation()}
     >
       {/* <div
@@ -50,11 +50,15 @@ const SidebarItems = ({ path, val }) => {
     <NavLink
       //className={`${isActive ? "text-blue-600" : ""}`}
       className={({ isActive }) =>
-        `${isActive ? "text-blue-600 text-shadow-blue-600" : ""}`
+        `${
+          isActive
+            ? "text-accent-orange hover:text-accent-orange"
+            : "text-white"
+        } `
       }
       to={path}
     >
-      <div className="flex justify-center items-center h-[100px] font-semibold text-[20px] rounded-2xl hover:bg-light hover:text-[22px] hover:text-blue-600 transition-all duration-300 ease-in-out">
+      <div className="flex justify-center items-center h-[100px] font-semibold text-[20px] rounded-[5px] hover:bg-light hover:text-[22px] transition-all duration-300 ease-in-out border-b-2 border-primary-blue">
         {val}
       </div>
     </NavLink>

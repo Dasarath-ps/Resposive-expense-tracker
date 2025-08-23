@@ -11,10 +11,10 @@ const Input = ({ label, value, type, placeholder, onChange }) => {
   };
   return (
     <>
-      <label className="text-blue-800 text-lg font-semibold">{label}</label>
-      <div className="flex items-center border-2 rounded-2xl border-blue-400 mb-4">
+      <label className="text-white text-lg font-semibold">{label}</label>
+      <div className="flex items-center border-2 rounded-2xl border-blue-400 mb-4 text-white">
         <input
-          className="h-10 outline-none ps-1 w-[90%]"
+          className="h-10 outline-none ps-1 w-[90%] text-white"
           type={
             type === "password" ? (showPassword ? "text" : "password") : type
           }
