@@ -42,7 +42,7 @@ const Expenses = () => {
                 onClick={() => setShowForm(false)}
                 className="text-white px-3 py-1 bg-red-500 rounded"
               >
-                close
+                Close
               </button>
             </div>
           </div>
