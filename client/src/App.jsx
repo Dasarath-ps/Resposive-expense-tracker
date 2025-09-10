@@ -1,11 +1,13 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Login from "./pages/Auth/Login";
+
 import Register from "./pages/Auth/Register";
 import Dashboard from "./pages/Dashboard";
 import Income from "./pages/Income";
 import Expenses from "./pages/Expenses";
 import Logout from "./pages/Logout";
+import NotFound from "./components/layout/NotFound";
 const App = () => {
   return (
     <Routes>
@@ -16,6 +18,7 @@ const App = () => {
       <Route path="/income" element={<Income />} />
       <Route path="/expenses" element={<Expenses />} />
       <Route path="/logout" element={<Logout />} />
+      <Route path="/*" element={<NotFound />} />
     </Routes>
   );
 };

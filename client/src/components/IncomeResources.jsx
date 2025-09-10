@@ -22,21 +22,29 @@ const IncomeResources = ({ Data, setData }) => {
 
     return () => observer.disconnect(); // cleanup
   }, []);
+  // if (!Array.isArray(Data) || Data.length === 0) {
+  //   return null;
+  // }
   return (
     <div className="relative  bg-background m-4  p-4 border-2 border-white rounded-md">
       <h2 className="font-itim">Income Resources</h2>
       <button className="absolute top-3 right-3 bg-primary-blue p-1 rounded-md ">
         download
       </button>
-      <div className=" income grid grid-cols-1 lg:grid-cols-2 md:gap-7 w-full h-100vh mt-4 p-2">
-        {Data.map((element, index) => (
-          <SourceData
-            key={index}
-            element={element}
-            Data={Data}
-            setData={setData}
-          />
-        ))}
+      <div className=" income grid grid-cols-1 md:grid-cols-2 md:gap-7 w-full h-100vh mt-4 p-2">
+        {Data && Data.length > 0 ? (
+          Data.map((element, index) => (
+            <SourceData
+              key={index}
+              element={element}
+              Data={Data}
+              setData={setData}
+              index={index}
+            />
+          ))
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
@@ -44,13 +52,13 @@ const IncomeResources = ({ Data, setData }) => {
 
 export default IncomeResources;
 
-const SourceData = ({ element, Data, setData }) => {
+const SourceData = ({ element, Data, setData, index }) => {
   let date = new Date(element.date).toLocaleDateString();
   const [highlight, setHighlight] = useState(false);
   const deleteSource = async (element) => {
     try {
       const userId = await getUser();
-      console.log(userId);
+      //console.log(userId);
       const res = await axios.post("http://localhost:8000/income/delete", {
         element,
         userId,
@@ -59,7 +67,7 @@ const SourceData = ({ element, Data, setData }) => {
     } catch (error) {
       console.log(error);
     }
-    const filterData = Data.filter((items) => items.source != element.source);
+    const filterData = Data.filter((_, i) => i !== index);
     setData(filterData);
   };
   return (
@@ -76,16 +84,19 @@ const SourceData = ({ element, Data, setData }) => {
 
       {/* Right side */}
       <div className="flex items-center gap-2">
-        {highlight && (
-          <div className="w-10 h-10 rounded-full bg-white flex justify-center items-center transition-all duration-300 ease-in-out">
-            <button
-              onClick={() => deleteSource(element)}
-              className="p-2 text-red-500 rounded-md"
-            >
-              <FaRegTrashAlt />
-            </button>
-          </div>
-        )}
+        <div
+          className={`w-10 h-10 rounded-full bg-white flex justify-center items-center 
+              transition-opacity duration-300 ease-in-out 
+              ${highlight ? "opacity-100" : "opacity-0"}`}
+        >
+          <button
+            onClick={() => deleteSource(element)}
+            className="p-2 text-red-500 rounded-md"
+          >
+            <FaRegTrashAlt />
+          </button>
+        </div>
+
         <div className="p-1 bg-green-500 rounded-lg w-17 flex justify-around items-center">
           <IoTrendingUpOutline />
           {element.amount}

@@ -24,7 +24,7 @@ const Sidebar = ({ ShowSidebar, setShowSidebar }) => {
       ref={menuRef}
       className={`${
         ShowSidebar ? "translate-x-0" : "-translate-x-[280px] "
-      } bg-background border-r-3 border-primary-blue fixed w-[280px] h-screen  z-[100] transition-all duration-500 ease-in-out `}
+      } bg-gray-800 border-2 border-r-white rounded-r-2xl fixed w-[280px] h-screen  z-[300] transition-all duration-500 ease-in-out `}
       onClick={(e) => e.stopPropagation()}
     >
       {/* <div
@@ -33,7 +33,7 @@ const Sidebar = ({ ShowSidebar, setShowSidebar }) => {
       >
         <FaArrowLeft />
       </div> */}
-      <div className="">
+      <div className="flex flex-col justify-center h-screen items-center">
         <SidebarItems path={"/dashboard"} val={"Home"} />
         <SidebarItems path={"/income"} val={"Income"} />
         <SidebarItems path={"/expenses"} val={"Expenses"} />
@@ -58,7 +58,7 @@ const SidebarItems = ({ path, val }) => {
       }
       to={path}
     >
-      <div className="flex justify-center items-center h-[100px] font-semibold text-[20px] rounded-[5px] hover:bg-light hover:text-[22px] transition-all duration-300 ease-in-out border-b-2 border-primary-blue">
+      <div className="flex justify-center items-center h-20 max-w-60 min-w-50 font-semibold text-[20px] rounded-[5px] hover:bg-light hover:text-[22px] transition-all duration-300 ease-in-out border-2 border-white m-2 hover:bg-white/30">
         {val}
       </div>
     </NavLink>

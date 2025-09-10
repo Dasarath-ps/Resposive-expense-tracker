@@ -9,7 +9,7 @@ const Container = ({ children }) => {
     <div
       className={`bg-background grid grid-cols-1 transition-all duration-600 ${
         ShowSidebar ? "md:grid-cols-[280px_1fr]" : "md:grid-cols-1"
-      } relative`}
+      } relative h-full`}
     >
       <div className="side-bar">
         <Sidebar ShowSidebar={ShowSidebar} setShowSidebar={setShowSidebar} />

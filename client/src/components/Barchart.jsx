@@ -1,4 +1,5 @@
 import React from "react";
+import image from "../assets/images/404.png";
 import {
   BarChart,
   Bar,
@@ -9,11 +10,22 @@ import {
   ResponsiveContainer,
   Cell,
 } from "recharts";
-const Barchart = ({ Data }) => {
+import { ButtonForAdd } from "../pages/Income";
+
+const Barchart = ({ Data, setshowForm }) => {
+  if (!Array.isArray(Data) || Data.length == 0) {
+    return (
+      <div className="flex flex-col h-[calc(100vh-40px)] items-center justify-center  ">
+        <h3 className="text-white text-2xl">No Data Available</h3>
+        <img className="max-w-60 max-h-60" src={image} alt="" />
+        <ButtonForAdd setshowForm={setshowForm} />
+      </div>
+    );
+  }
   return (
-    <div className=" h-[550px] md:h-screen border-2 border-white m-4 mb-4 rounded">
+    <div className="max-w-[1200px] h-[600px] w-[70vw] border-2 border-white m-auto mb-4 rounded">
       <ResponsiveContainer>
-        <BarChart data={Data}>
+        <BarChart data={Array.isArray(Data) ? Data : []}>
           {/* <CartesianGrid stroke={"#ccc"} strokeDasharray={"1 3"} /> */}
           <XAxis dataKey={"source"} />
           <YAxis />
@@ -27,7 +39,7 @@ const Barchart = ({ Data }) => {
               strokeWidth: 2,
             }}
           >
-            {Data.map((entry, index) => (
+            {(Array.isArray(Data) ? Data : []).map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
                 fill={index % 2 === 0 ? "#007bff" : "#5a86ad"}
