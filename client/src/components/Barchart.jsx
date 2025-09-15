@@ -15,7 +15,7 @@ import { ButtonForAdd } from "../pages/Income";
 const Barchart = ({ Data, setshowForm }) => {
   if (!Array.isArray(Data) || Data.length == 0) {
     return (
-      <div className="flex flex-col h-[calc(100vh-40px)] items-center justify-center  ">
+      <div className="flex flex-col h-[calc(100vh-40px)] items-center justify-center overflow-hidden bg-background ">
         <h3 className="text-white text-2xl">No Data Available</h3>
         <img className="max-w-60 max-h-60" src={image} alt="" />
         <ButtonForAdd setshowForm={setshowForm} />
@@ -23,7 +23,8 @@ const Barchart = ({ Data, setshowForm }) => {
     );
   }
   return (
-    <div className="max-w-[1200px] h-[600px] w-[70vw] border-2 border-white m-auto mb-4 rounded">
+    <div className="max-w-[1200px] h-[600px] w-[70vw] border-2 border-white m-auto mb-4 rounded-[15px] mt-4 shadow-[3px_3px_10px_white] hover:shadow-none transition-all duration-500 overflow-hidden  ease-in-out shadow-white hover:bg-white/7 bg-white/5">
+      <span className="shadow"></span>
       <ResponsiveContainer>
         <BarChart data={Array.isArray(Data) ? Data : []}>
           {/* <CartesianGrid stroke={"#ccc"} strokeDasharray={"1 3"} /> */}

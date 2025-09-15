@@ -7,7 +7,7 @@ const Navbar = ({ setShowSidebar }) => {
     setShowSidebar((prev) => !prev);
   };
   return (
-    <div className="sticky top-0 flex h-[70px] items-center justify-between border-b-2 border-dark-grey bg-background z-200">
+    <div className="sticky top-0 flex h-[70px] md:w-[calc(100% - 280px)] items-center justify-between border-b-2 border-dark-grey bg-background z-200">
       <div
         onClick={handleSidebar}
         className="flex justify-center items-center text-3xl rounded-full h-13 w-13 border-2 text-dark-grey bg-white hover:border-transparent border-white hover:border-none hover:bg-primary-blue hover:text-white transition-all duration-300 ml-2"

@@ -19,7 +19,7 @@ const Dashboard = () => {
   }
   return (
     <Container>
-      <div className="flex  h-[calc(100vh-70px)] text-white flex-col items-center">
+      <div className="flex  h-[calc(100vh-70px)] md:w-[calc(100% - 280px)] text-white flex-col items-center">
         {data?.products.map((items) => (
           <div
             key={items.id}

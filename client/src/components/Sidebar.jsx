@@ -1,16 +1,19 @@
+import { isAction } from "@reduxjs/toolkit";
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import { FaArrowLeft } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 const Sidebar = ({ ShowSidebar, setShowSidebar }) => {
   const handleSidebar = (e) => setShowSidebar((prev) => !prev);
   const menuRef = useRef();
-
+  const navigator = useNavigate();
   useEffect(() => {
     const handle = (e) => {
-      if (ShowSidebar && !menuRef.current.contains(e.target)) {
-        setShowSidebar(false);
-        //console.log(ShowSidebar);
+      if (window.innerWidth < 768) {
+        if (ShowSidebar && !menuRef.current.contains(e.target)) {
+          setShowSidebar(false);
+          //console.log(ShowSidebar);
+        }
       }
     };
     document.addEventListener("mousedown", handle);
@@ -18,7 +21,11 @@ const Sidebar = ({ ShowSidebar, setShowSidebar }) => {
       document.removeEventListener("mousedown", handle);
     };
   }, [ShowSidebar, setShowSidebar]);
-
+  const clear = (e) => {
+    //e.preventDefault();
+    localStorage.clear();
+    navigator("/");
+  };
   return (
     <div
       ref={menuRef}
@@ -37,7 +44,12 @@ const Sidebar = ({ ShowSidebar, setShowSidebar }) => {
         <SidebarItems path={"/dashboard"} val={"Home"} />
         <SidebarItems path={"/income"} val={"Income"} />
         <SidebarItems path={"/expenses"} val={"Expenses"} />
-        <SidebarItems path={"/logout"} val={"Logout"} />
+        <div
+          className="flex justify-center items-center h-20 max-w-60 min-w-50 font-semibold text-[20px]  hover:text-[22px] transition-all duration-300 ease-in-out text-white border-2 border-white m-2 rounded-[10px]"
+          onClick={clear}
+        >
+          Logout
+        </div>
       </div>
     </div>
   );
@@ -52,13 +64,15 @@ const SidebarItems = ({ path, val }) => {
       className={({ isActive }) =>
         `${
           isActive
-            ? "text-accent-orange hover:text-accent-orange"
-            : "text-white"
+            ? "text-black/90 bg-white/70 border-3 border-white m-2 rounded-[10px] font-semibold"
+            : "text-white border-2 border-white m-2 rounded-[10px]"
         } `
       }
       to={path}
     >
-      <div className="flex justify-center items-center h-20 max-w-60 min-w-50 font-semibold text-[20px] rounded-[5px] hover:bg-light hover:text-[22px] transition-all duration-300 ease-in-out border-2 border-white m-2 hover:bg-white/30">
+      <div
+        className={`flex justify-center items-center h-20 max-w-60 min-w-50 font-semibold text-[20px] rounded-[5px] hover:text-[22px] transition-all duration-300 ease-in-out`}
+      >
         {val}
       </div>
     </NavLink>

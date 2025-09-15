@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AuthLayout from "../../components/layout/AuthLayout";
 import Input from "../../components/Input";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { validEmail } from "../../helper.js/validation";
 import axios from "axios";
 const Login = () => {
@@ -65,12 +65,11 @@ const Login = () => {
             </button>
             <p className="text-white">
               Create new Account
-              <span
-                onClick={() => navigator("/register")}
-                className="text-primary-blue hover:underline"
-              >
-                Sign Up
-              </span>
+              <Link to={"/register"}>
+                <span className="text-primary-blue hover:underline">
+                  Sign Up
+                </span>
+              </Link>
             </p>
           </div>
         </form>

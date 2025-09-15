@@ -28,10 +28,24 @@ const Income = () => {
     <Container>
       <div className="grid grid-cols-1 text-white ">
         <div className="relative">
+          <div className="">
+            <span className="shadow-[0px_0px_1000px_60px_rgba(29,78,216,1)] w-20"></span>
+            <span className="shadow-[0px_0px_1000px_60px_rgba(29,78,216,1)] w-20"></span>
+          </div>
           <BarChart Data={Data} setshowForm={setshowForm} />
           <ButtonForAdd setshowForm={setshowForm} />
         </div>
-        <IncomeResources Data={Data} setData={setData} />
+        {Data && Data.length > 0 ? (
+          <div className="">
+            <div className="">
+              <span className="shadow-[0px_0px_1000px_60px_rgba(29,78,216,1)] w-20"></span>
+              <span className="shadow-[0px_0px_1000px_60px_rgba(29,78,216,1)] w-20"></span>
+            </div>
+            <IncomeResources Data={Data} setData={setData} />
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
       {showForm && (
         <div className="fixed inset-0 flex justify-center items-center bg-black/40">

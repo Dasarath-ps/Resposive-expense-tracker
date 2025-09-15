@@ -8,7 +8,7 @@ const Container = ({ children }) => {
   return (
     <div
       className={`bg-background grid grid-cols-1 transition-all duration-600 ${
-        ShowSidebar ? "md:grid-cols-[280px_1fr]" : "md:grid-cols-1"
+        ShowSidebar ? "md:grid-cols-[280px_1fr]" : "grid-cols-1"
       } relative h-full`}
     >
       <div className="side-bar">

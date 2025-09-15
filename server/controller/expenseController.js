@@ -61,6 +61,23 @@ export const getAllExpenses = async (req, res) => {
   }
 };
 export const deleteAnExpense = async (req, res) => {
-  const { userId, element } = req.body;
-  console.log(userId, element);
+  if (!req.body)
+    return res.status(400).json({ messsage: "All data Needed..." });
+  try {
+    const { userId, element } = req.body;
+    console.log(userId);
+
+    const id = new mongoose.Types.ObjectId(userId);
+    const data = await Expense.updateOne(
+      { userId: id },
+      {
+        $pull: { expenses: { expense: element.expense } },
+      }
+    );
+    console.log(data);
+
+    res.status(200).json({ data });
+  } catch (error) {
+    console.log(error);
+  }
 };

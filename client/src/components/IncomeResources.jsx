@@ -26,7 +26,7 @@ const IncomeResources = ({ Data, setData }) => {
   //   return null;
   // }
   return (
-    <div className="relative  bg-background m-4  p-4 border-2 border-white rounded-md">
+    <div className="relative transition-all duration-500 ease-in-out m-4  p-4 border-2 border-white rounded-md hover:bg-white/10 bg-white/5 shadow-md shadow-white/70 hover:shadow-none overflow-hidden">
       <h2 className="font-itim">Income Resources</h2>
       <button className="absolute top-3 right-3 bg-primary-blue p-1 rounded-md ">
         download
