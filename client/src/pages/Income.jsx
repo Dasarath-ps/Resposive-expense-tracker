@@ -10,14 +10,19 @@ import FormDatails from "../components/FormDetails.jsx";
 const Income = () => {
   const [showForm, setshowForm] = useState(false);
   const [Data, setData] = useState([]);
+  //const [total, settotal] = useState("");
   const pr = import.meta.env.VITE_API_URL;
   //console.log(pr);
   useEffect(() => {
     const fetchIncomeData = async () => {
       let userId = await getUser();
+      let total;
       axios
         .get(`${pr}/income/chart-data/${userId}`)
-        .then((res) => setData(res.data))
+        .then((res) => {
+          console.log(res.data);
+          setData(res.data);
+        })
         .catch((err) => console.error(err));
     };
     fetchIncomeData();

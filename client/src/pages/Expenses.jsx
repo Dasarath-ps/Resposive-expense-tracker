@@ -7,7 +7,7 @@ import LineBar from "../components/LineBar";
 import axios from "axios";
 import { getUser } from "../helper.js/getUser";
 import { FaRegTrashAlt, FaTrashAlt } from "react-icons/fa";
-
+import image from "../assets/images/404.png";
 const Expenses = () => {
   const [expenseSource, setexpenseSource] = useState("");
   const [dateOfExpense, setdateOfExpense] = useState("");
@@ -17,6 +17,7 @@ const Expenses = () => {
   const [Data, setData] = useState([]);
   const [highlight, sethighlight] = useState(false);
   const formRef = useRef();
+
   //console.log(Data);
 
   useEffect(() => {
@@ -83,11 +84,26 @@ const Expenses = () => {
       console.log(error);
     }
   };
+  if (!Array.isArray(Data) || Data.length == 0) {
+    return (
+      <div className="flex flex-col h-[calc(100vh-40px)] items-center justify-center overflow-hidden bg-background ">
+        <h3 className="text-white text-2xl">No Data Available</h3>
+        <img className="max-w-60 max-h-60" src={image} alt="" />
+        <button
+          onClick={() => setShowForm(true)}
+          className="px-2 py-2 bg-primary-blue text-white text-md rounded-lg absolute
+          top-3 right-3"
+        >
+          + Expense
+        </button>
+      </div>
+    );
+  }
   return (
     <Container>
       <span className="shadow-[0px_0px_1000px_60px_rgba(29,78,216,1)] flex justify-center w-20"></span>
       <span className="shadow-[0px_0px_10000px_60px_rgba(29,78,216,1)] flex justify-center w-20"></span>
-      <div className=" border-2 border-white pt-12 p-3 m-2 rounded-xl relative overflow-hidden bg-background">
+      <div className="  pt-12 p-3 m-2 rounded-xl relative overflow-hidden bg-white/1">
         <LineBar Data={Data} />
         <button
           onClick={() => setShowForm(true)}
@@ -141,26 +157,26 @@ const Expenses = () => {
       </div>
 
       {Data && Data.length > 0 ? (
-        <div className="border-2 border-white m-2 p-3 rounded-lg overflow-hidden bg-background">
+        <div className="border-2 border-white mx-5 my-4 p-3 rounded-lg overflow-hidden bg-white/1">
           <div className="flex justify-center">
             <span className="shadow-[0px_0px_1000px_50px_rgba(29,78,216,0.9)] w-20"></span>
             <span className="shadow-[0px_0px_10000px_50px_rgba(29,78,216,0.9)] w-20"></span>
           </div>
           <h2 className="text-white">Expenses</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 bg-background overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 bg-black overflow-hidden">
             {Data.map((element, index) => {
               let formatedDate = new Date(element.date).toLocaleDateString();
 
               return (
                 <div
                   key={element._id}
-                  className="group text-white flex justify-between items-center border-2 border-white rounded-lg mt-1 px-8 py-5 bg-background overflow-hidden"
+                  className="group text-white flex justify-between items-center border-2 border-white rounded-xl mt-1 px-8 py-5  overflow-hidden bg-white/10 shadow-md shadow-white hover:shadow-none transition-all duration-300"
                 >
                   <div className="left-section grid gap-2">
                     <div>{element.expense}</div>
                     <div>{formatedDate}</div>
                   </div>
-                  <div className="flex justify-center items-center gap-6 overflow-hidden bg-background">
+                  <div className="flex justify-center items-center gap-6 ">
                     <button onClick={() => deleteExpense(element, index)}>
                       <div className="opacity-0 group-hover:opacity-100 w-10 h-10 rounded-full flex justify-center items-center bg-white text-red-500 transition-all duration-300 ease-in-out">
                         <FaRegTrashAlt />

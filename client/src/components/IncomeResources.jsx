@@ -72,7 +72,7 @@ const SourceData = ({ element, Data, setData, index }) => {
   };
   return (
     <div
-      className="flex justify-between items-center hover:bg-dark-grey transition-all duration-300 ease-in-out rounded-lg p-2 "
+      className="flex justify-between items-center hover:bg-white/40 shadow shadow-white hover:shadow-none transition-all duration-400 ease-in-out rounded-lg py-4 px-3 bg-white/20"
       onMouseEnter={() => setHighlight(true)}
       onMouseLeave={() => setHighlight(false)}
     >

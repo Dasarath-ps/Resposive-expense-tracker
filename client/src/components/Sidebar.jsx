@@ -31,7 +31,7 @@ const Sidebar = ({ ShowSidebar, setShowSidebar }) => {
       ref={menuRef}
       className={`${
         ShowSidebar ? "translate-x-0" : "-translate-x-[280px] "
-      } bg-gray-800 border-2 border-r-white rounded-r-2xl fixed w-[280px] h-screen  z-[300] transition-all duration-500 ease-in-out `}
+      } bg-gray-800 border-2 border-r-white rounded-b-2xl fixed w-[280px] h-screen  z-[300] transition-all duration-500 ease-in-out `}
       onClick={(e) => e.stopPropagation()}
     >
       {/* <div

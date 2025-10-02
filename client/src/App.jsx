@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Login from "./pages/Auth/Login";
 
@@ -8,7 +8,9 @@ import Income from "./pages/Income";
 import Expenses from "./pages/Expenses";
 import NotFound from "./components/layout/NotFound";
 import Home from "./components/layout/Home";
+import Demo from "./pages/Demo";
 const App = () => {
+  const [Content, setContent] = useState([]);
   return (
     <Routes>
       <Route path="/" element={<Login />} />

@@ -13,21 +13,6 @@ import {
 import image from "../assets/images/404.png";
 const LineBar = ({ Data }) => {
   ///console.log(Data);
-  if (!Array.isArray(Data) || Data.length == 0) {
-    return (
-      <div className="flex flex-col h-[calc(100vh-40px)] items-center justify-center overflow-hidden bg-background ">
-        <h3 className="text-white text-2xl">No Data Available</h3>
-        <img className="max-w-60 max-h-60" src={image} alt="" />
-        <button
-          onClick={() => setShowForm(true)}
-          className="px-2 py-2 bg-primary-blue text-white text-md rounded-lg absolute
-        top-3 right-3"
-        >
-          + Expense
-        </button>
-      </div>
-    );
-  }
 
   return Data ? (
     <div className="w-full h-[400px]">

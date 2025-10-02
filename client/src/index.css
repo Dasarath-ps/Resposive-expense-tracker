@@ -12,8 +12,9 @@ body {
   --font-itim: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --color-primary-blue: #007bff;
   --color-white: #ffffff;
-  --color-background: #111;
-  --color-dark-grey: #2e2e2e;
+  --color-background: #181818;
+  --color-dark-grey: #27272a;
+  --color-hover-color: #323232;
   --color-accent-orange: #ff6b35;
   --color-blur: #1d4ed8;
 }
