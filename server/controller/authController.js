@@ -4,7 +4,7 @@ export const generateToken = (id) => {
   return jsonwebtoken.sign({ id }, process.env.JWT_KEY, { expiresIn: "1h" });
 };
 export const userRegistration = async (req, res) => {
-  console.log(req.body);
+  //console.log(req.body);
   const { FullName, Email, Password } = req.body;
   if (!FullName || !Email || !Password) {
     return res.status(400).json({ message: "Not all input value Entered" });
@@ -52,11 +52,28 @@ export const userLogin = async (req, res) => {
 export const getUser = async (req, res, next) => {
   try {
     let token = req.header("Authorization").split(" ")[1];
+    //console.log(token);
 
     if (!token) return res.status(400).json({ message: "no token is saved." });
     const decoded = jsonwebtoken.verify(token, process.env.JWT_KEY);
-    req.user = await User.findById(decoded.id);
-    next();
+    if (
+      decoded._id &&
+      typeof decoded._id === "string" &&
+      decoded._id.startsWith("guest_")
+    ) {
+      req.user = decoded; // Pass the whole decoded object for guests
+      return next();
+    }
+
+    // Case 2: Normal user
+    if (decoded.id) {
+      req.user = await User.findById(decoded.id);
+      if (!req.user) {
+        return res.status(404).json({ message: "User not found." });
+      }
+      console.log("User found:", req.user);
+      return next();
+    }
   } catch (error) {
     return res.status(500).json({ message: "Error", error });
   }

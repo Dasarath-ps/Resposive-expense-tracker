@@ -5,6 +5,7 @@ import { useState } from "react";
 
 const Container = ({ children }) => {
   const [ShowSidebar, setShowSidebar] = useState(true);
+  console.log(ShowSidebar);
   return (
     <div
       className={`bg-background grid grid-cols-1 transition-all duration-600 ${

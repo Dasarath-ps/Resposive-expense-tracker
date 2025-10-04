@@ -7,9 +7,8 @@ export const getUser = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-
     return res.data.user._id;
   } catch (error) {
-    return err;
+    console.log(error);
   }
 };

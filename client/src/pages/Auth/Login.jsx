@@ -33,6 +33,18 @@ const Login = () => {
         }
       });
   };
+  const handleGuestLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const data = await axios.post("http://localhost:8000/auth/guest-login");
+      console.log(data);
+
+      localStorage.setItem("token", data.data.token);
+      navigator("/dashboard");
+    } catch (err) {
+      console.error(err);
+    }
+  };
   return (
     <AuthLayout>
       <div className="grid grid-cols-1 justify-center items-center">
@@ -70,6 +82,12 @@ const Login = () => {
                   Sign Up
                 </span>
               </Link>
+              <button
+                onClick={handleGuestLogin}
+                className="mt-4 bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600"
+              >
+                Continue as Guest
+              </button>
             </p>
           </div>
         </form>

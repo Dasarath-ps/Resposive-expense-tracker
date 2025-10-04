@@ -51,6 +51,18 @@ export const addExpense = async (req, res) => {
 export const getAllExpenses = async (req, res) => {
   try {
     const { id } = req.body;
+
+    if (id.startsWith("guest_")) {
+      return res.json({
+        expenses: [
+          { expense: "Food", amount: 500, date: "2025-01-15" },
+          { expense: "Travel", amount: 1200, date: "2025-01-20" },
+          { expense: "Employee Salary", amount: 2000, date: "2025-02-20" },
+        ],
+      });
+    }
+
+    //Expense.find({ userId: id }).then((data) => res.json({ expenses: data }));
     const userId = new mongoose.Types.ObjectId(id);
     //console.log(id);
     const expenses = await Expense.findOne({ userId: userId });

@@ -51,7 +51,17 @@ export const addNewSource = async (req, res) => {
 export const getIncomeDate = async (req, res) => {
   try {
     const { userId } = req.params;
+    if (userId.startsWith("guest_")) {
+      return res.json([
+        { source: "Rent", amount: 2000, date: "2025-01-01" },
+        { source: "Freelance on MERN", amount: 3000, date: "2025-02-01" },
+        { source: "Product Sail", amount: 6000, date: "2025-03-01" },
+      ]);
+    }
     const id = new mongoose.Types.ObjectId(userId);
+
+    // else → fetch from DB
+    //Income.find({ userId: id }).then((data) => res.json(data));
     //console.log(userId);
     const data = await Income.findOne({ userId: id });
     //console.log(data);
@@ -83,7 +93,7 @@ export const deleteIncomeResources = async (req, res) => {
         $pull: { incomes: { source: element.source } },
       }
     );
-    console.log(manipulatedData);
+    //console.log(manipulatedData);
 
     res.status(200).json({ message: "Sucsses" });
   } catch (error) {

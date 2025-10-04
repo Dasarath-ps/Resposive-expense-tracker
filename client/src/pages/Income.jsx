@@ -16,6 +16,7 @@ const Income = () => {
   useEffect(() => {
     const fetchIncomeData = async () => {
       let userId = await getUser();
+
       let total;
       axios
         .get(`${pr}/income/chart-data/${userId}`)
