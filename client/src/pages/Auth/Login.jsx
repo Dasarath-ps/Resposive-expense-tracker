@@ -4,6 +4,8 @@ import Input from "../../components/Input";
 import { Link, useNavigate } from "react-router-dom";
 import { validEmail } from "../../helper.js/validation";
 import axios from "axios";
+import { FaRegHandPointUp } from "react-icons/fa";
+
 const Login = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
@@ -82,12 +84,17 @@ const Login = () => {
                   Sign Up
                 </span>
               </Link>
-              <button
-                onClick={handleGuestLogin}
-                className="mt-4 bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600"
-              >
-                Continue as Guest
-              </button>
+              <div className="mt-6 flex flex-col items-center justify-center">
+                <button
+                  onClick={handleGuestLogin}
+                  className="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600 transition-all duration-200"
+                >
+                  Continue as Guest
+                </button>
+
+                {/* Animated pointing icon */}
+                <FaRegHandPointUp className="mt-3 text-primary-blue text-3xl animate-bounce" />
+              </div>
             </p>
           </div>
         </form>

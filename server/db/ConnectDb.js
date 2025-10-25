@@ -1,11 +1,17 @@
 import mongoose from "mongoose";
-export const ConnectDb = () => {
-  mongoose
-    .connect("mongodb://127.0.0.1:27017/expenses-tracker")
-    .then(() => {
-      console.log("Database is connected");
-    })
-    .catch((err) => {
-      console.log("Error", err);
-    });
+import dotenv from "dotenv";
+
+dotenv.config();
+
+export const ConnectDb = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URL);
+    console.log("✅ Database is connected");
+  } catch (err) {
+    console.error("❌ Database connection failed");
+    console.error("Error name:", err.name);
+    console.error("Error message:", err.message);
+    console.error("Full error:", err);
+    process.exit(1); // Stop the server if DB connection fails
+  }
 };

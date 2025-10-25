@@ -1,7 +1,8 @@
 import React from "react";
 import Chart from "react-apexcharts";
 
-const DonutChartApex = ({ Data }) => {
+const DonutChartApex = ({ Data, header }) => {
+  console.log(header);
   if (!Array.isArray(Data) || Data.length === 0) {
     return (
       <div className="flex flex-col h-[calc(100vh-40px)] items-center justify-center overflow-hidden bg-background z-100">
@@ -9,7 +10,30 @@ const DonutChartApex = ({ Data }) => {
       </div>
     );
   }
-
+  const hasTypeField = Data.some((item) => item.type);
+  const incomeColors = [
+    "#4CAF50", // Green
+    "#2196F3", // Blue
+    "#FF9800", // Orange
+    "#E91E63", // Pink
+    "#9C27B0", // Purple
+    "#00BCD4", // Cyan
+    "#FFC107", // Amber
+    "#8BC34A", // Light Green
+    "#FF5722", // Deep Orange
+  ];
+  var barColors = [];
+  if (hasTypeField) {
+    // If data has type, use red/green dynamically
+    barColors = Data.map((item) =>
+      item.type === "income" ? "#00E396" : "#FF4560"
+    );
+  } else {
+    // Otherwise (like your income route), use varied green tones
+    barColors = Data.map(
+      (_, index) => incomeColors[index % incomeColors.length]
+    );
+  }
   const options = {
     chart: {
       type: "donut",
@@ -38,13 +62,7 @@ const DonutChartApex = ({ Data }) => {
       gradient: {
         shade: "dark",
         type: "horizontal",
-        gradientToColors: [
-          "#00E396",
-          "#FEB019",
-          "#FF4560",
-          "#775DD0",
-          "#008FFB",
-        ],
+        gradientToColors: barColors,
         stops: [0, 100],
       },
     },
@@ -54,7 +72,14 @@ const DonutChartApex = ({ Data }) => {
   const series = Data.map((item) => item.amount);
 
   return (
-    <div className="max-w-[800px] h-[400px] md:w-[30vw] flex justify-center  m-auto mt-6 p-4 rounded-2xl shadow-lg bg-white/5 hover:bg-white/10 transition-all duration-300 md:mt-6 overflow-hidden z-100">
+    <div
+      className={
+        /*"flex justify-center items-center p-6  rounded-2xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md shadow-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all duration-500 h-[450px]"*/ ``
+      }
+    >
+      <h2 className="text-white text-2xl font-itim text-center mb-4  decoration-2 underline">
+        {header}
+      </h2>
       <Chart options={options} series={series} type="donut" height={350} />
     </div>
   );

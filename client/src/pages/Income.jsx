@@ -47,7 +47,13 @@ const Income = () => {
               <span className="shadow-[0px_0px_1000px_60px_rgba(29,78,216,1)] w-20"></span>
               <span className="shadow-[0px_0px_1000px_60px_rgba(29,78,216,1)] w-20"></span>
             </div>
-            <IncomeResources Data={Data} setData={setData} />
+            <IncomeResources
+              Data={Data}
+              setData={setData}
+              onDashboard={false}
+              header="Income Resources"
+              buttonText={"Download"}
+            />
           </div>
         ) : (
           <></>

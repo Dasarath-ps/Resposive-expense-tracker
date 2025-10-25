@@ -4,15 +4,41 @@ import Chart from "react-apexcharts";
 import { ButtonForAdd } from "../pages/Income";
 
 const Barchart = ({ Data, setshowForm }) => {
+  console.log(Data);
+
   if (!Array.isArray(Data) || Data.length == 0) {
     return (
-      <div className="flex flex-col h-[calc(100vh-40px)] items-center justify-center overflow-hidden bg-background ">
+      <div className="flex flex-col h-[calc(100vh-40px)] items-center justify-center overflow-hidden bg-background z-200">
         <h3 className="text-white text-2xl">No Data Available</h3>
         <img className="max-w-60 max-h-60" src={image} alt="" />
         <ButtonForAdd setshowForm={setshowForm} />
       </div>
     );
   }
+  const hasTypeField = Data.some((item) => item.type);
+  const incomeColors = [
+    "#00E396",
+    "#00C97C",
+    "#00B368",
+    "#009E55",
+    "#008A45",
+    "#00D78A",
+    "#00FFB2",
+  ];
+  let barColors = [];
+
+  if (hasTypeField) {
+    // If data has type, use red/green dynamically
+    barColors = Data.map((item) =>
+      item.type === "income" ? "#00E396" : "#FF4560"
+    );
+  } else {
+    // Otherwise (like your income route), use varied green tones
+    barColors = Data.map(
+      (_, index) => incomeColors[index % incomeColors.length]
+    );
+  }
+
   const options = {
     chart: {
       type: "bar",
@@ -26,12 +52,12 @@ const Barchart = ({ Data, setshowForm }) => {
     },
     plotOptions: {
       bar: {
-        borderRadius: 12,
-        columnWidth: "40%",
+        borderRadius: 9,
+        columnWidth: "50%",
         distributed: true, // makes each bar different color
       },
     },
-    colors: ["#00E396", "#FEB019", "#FF4560", "#775DD0", "#008FFB"],
+    colors: barColors,
     dataLabels: {
       enabled: true,
       style: {
@@ -56,6 +82,9 @@ const Barchart = ({ Data, setshowForm }) => {
     grid: {
       borderColor: "rgba(255,255,255,0.1)",
     },
+    legend: {
+      show: false, // 👈 this line removes the color boxes (legend)
+    },
   };
 
   const series = [
@@ -65,9 +94,16 @@ const Barchart = ({ Data, setshowForm }) => {
     },
   ];
   return (
-    <div className="max-w-[1200px] h-[600px] w-[70vw] m-auto mt-6 p-4 rounded-[15px] shadow-[3px_3px_15px_rgba(0,0,0,0.6)] bg-white/5 hover:bg-white/10 transition-all duration-300">
-      <Chart options={options} series={series} type="bar" height={500} />
+    <div className="mt-6 mx-5 p-6 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md shadow-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all duration-500 overflow-hidden z-200">
+      <Chart
+        options={options}
+        series={series}
+        type="bar"
+        height={400}
+        width="100%"
+      />
     </div>
+
     // <div className="max-w-[1200px] h-[600px] w-[70vw] border-2 border-white m-auto mb-4 rounded-[15px] mt-4 shadow-[3px_3px_10px_white] hover:shadow-none transition-all duration-500 overflow-hidden  ease-in-out shadow-white hover:bg-white/7 bg-white/5">
     //   <span className="shadow"></span>
     //   <ResponsiveContainer>

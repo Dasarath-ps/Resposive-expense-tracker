@@ -71,7 +71,7 @@ const GlowingLineChart = ({ Data }) => {
   ];
 
   return (
-    <div className="bg-slate-900 p-6 rounded-2xl shadow-2xl max-w-1200px m-auto w-[100%] md:w-[calc(70vw-280px)] overflow-hidden z-100">
+    <div className="bg-slate-900 p-6 rounded-2xl shadow-2xl max-w-1200px m-auto w-[100%]  overflow-hidden z-100">
       <Chart options={options} series={series} type="area" height={420} />
     </div>
   );
