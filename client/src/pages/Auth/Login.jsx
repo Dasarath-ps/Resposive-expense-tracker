@@ -11,6 +11,7 @@ const Login = () => {
   const [Password, setPassword] = useState("");
   const [Error, setError] = useState("");
   const pr = import.meta.env.REACT_APP_API_URL;
+  console.log(pr);
   const navigator = useNavigate();
   const handleLogin = (e) => {
     e.preventDefault();
