@@ -10,7 +10,7 @@ import IncomeResources from "../components/IncomeResources";
 import Loader from "../components/Loader"; // <-- your loading animation component
 
 const Demo = () => {
-  const pr = import.meta.env.REACT_APP_API_URL;
+  const pr = import.meta.env.VITE_REACT_APP_API_URL;
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
   const [Details, setDetails] = useState([]);

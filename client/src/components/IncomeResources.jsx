@@ -10,7 +10,7 @@ const IncomeResources = ({ Data, setData, pageType, header, buttonText }) => {
   // console.log(header);
 
   console.log(Data);
-  const pr = import.meta.env.REACT_APP_API_URL;
+  const pr = import.meta.env.VITE_REACT_APP_API_URL;
   const navigate = useNavigate();
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -82,7 +82,7 @@ export default IncomeResources;
 
 const SourceData = ({ element, Data, setData, index }) => {
   const [highlight, setHighlight] = useState(false);
-  const pr = import.meta.env.REACT_APP_API_URL;
+  const pr = import.meta.env.VITE_REACT_APP_API_URL;
   const date = element.date
     ? new Date(element.date).toLocaleDateString()
     : null;

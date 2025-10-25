@@ -22,7 +22,7 @@ const Dashboard = () => {
   //   );
   // }
 
-  const pr = import.meta.env.REACT_APP_API_URL;
+  const pr = import.meta.env.VITE_REACT_APP_API_URL;
   const [expense, setexpense] = useState([]);
   const [income, setincome] = useState();
   useEffect(() => {

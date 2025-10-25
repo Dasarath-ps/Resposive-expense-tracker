@@ -6,7 +6,7 @@ export const FormDatails = ({ formRef, showForm, setshowForm, setData }) => {
   const [Amount, setAmount] = useState("");
   const [date, setdate] = useState("");
   const [Error, setError] = useState("");
-  const pr = import.meta.env.REACT_APP_API_URL;
+  const pr = import.meta.env.VITE_REACT_APP_API_URL;
   useEffect(() => {
     const handle = (e) => {
       if (showForm && !formRef.current.contains(e.target)) {

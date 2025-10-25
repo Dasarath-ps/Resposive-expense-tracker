@@ -19,7 +19,7 @@ const Expenses = () => {
   const formRef = useRef();
 
   //console.log(Data);
-  const pr = import.meta.env.REACT_APP_API_URL;
+  const pr = import.meta.env.VITE_REACT_APP_API_URL;
 
   useEffect(() => {
     const getExpneses = async () => {

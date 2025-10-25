@@ -10,7 +10,7 @@ const Login = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [Error, setError] = useState("");
-  const pr = import.meta.env.REACT_APP_API_URL;
+  const pr = import.meta.env.vITE_REACT_APP_API_URL;
   console.log(pr);
   const navigator = useNavigate();
   const handleLogin = (e) => {
