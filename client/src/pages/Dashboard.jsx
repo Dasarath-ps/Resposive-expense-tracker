@@ -22,7 +22,7 @@ const Dashboard = () => {
   //   );
   // }
 
-  const pr = import.meta.env.VITE_API_URL;
+  const pr = import.meta.env.REACT_APP_API_URL;
   const [expense, setexpense] = useState([]);
   const [income, setincome] = useState();
   useEffect(() => {
@@ -46,17 +46,15 @@ const Dashboard = () => {
       try {
         const id = await getUser();
 
-        axios
-          .post("http://localhost:8000/expense/getallexpenses", { id })
-          .then((res) => {
-            console.log(res.data);
-            const total = res.data.expenses.reduce(
-              (sum, item) => sum + item.amount,
-              0
-            );
-            setexpense(total);
-            console.log(total);
-          });
+        axios.post(`${pr}/expense/getallexpenses`, { id }).then((res) => {
+          console.log(res.data);
+          const total = res.data.expenses.reduce(
+            (sum, item) => sum + item.amount,
+            0
+          );
+          setexpense(total);
+          console.log(total);
+        });
       } catch (error) {
         console.log(error);
       }

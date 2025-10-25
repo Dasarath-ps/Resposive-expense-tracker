@@ -12,13 +12,14 @@ const Register = () => {
   const [Password, setPassword] = useState("");
   const [Error, setError] = useState("");
   const handleRegister = (e) => {
+    const pr = import.meta.env.REACT_APP_API_URL;
     e.preventDefault();
     if (!FullName) return setError("Please Enter Your Name");
     if (!Email) return setError("Please Enter Email");
     if (!validEmail(Email)) return setError("Please Enter A Valid Email");
     if (!Password) return setError("Please Enter A Password");
     axios
-      .post("http://localhost:8000/auth/register", {
+      .post(`${pr}/auth/register`, {
         FullName,
         Email,
         Password,

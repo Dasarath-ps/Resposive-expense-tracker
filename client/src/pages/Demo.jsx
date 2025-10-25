@@ -10,7 +10,7 @@ import IncomeResources from "../components/IncomeResources";
 import Loader from "../components/Loader"; // <-- your loading animation component
 
 const Demo = () => {
-  const pr = import.meta.env.VITE_API_URL;
+  const pr = import.meta.env.REACT_APP_API_URL;
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
   const [Details, setDetails] = useState([]);
@@ -20,7 +20,6 @@ const Demo = () => {
     const fetchData = async () => {
       try {
         const userId = await getUser();
-
         // Fetch Income
         const incomeRes = await axios.get(`${pr}/income/chart-data/${userId}`);
         const totalIncome = incomeRes.data.reduce(

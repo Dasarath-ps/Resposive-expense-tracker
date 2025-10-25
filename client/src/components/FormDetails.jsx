@@ -6,7 +6,7 @@ export const FormDatails = ({ formRef, showForm, setshowForm, setData }) => {
   const [Amount, setAmount] = useState("");
   const [date, setdate] = useState("");
   const [Error, setError] = useState("");
-
+  const pr = import.meta.env.REACT_APP_API_URL;
   useEffect(() => {
     const handle = (e) => {
       if (showForm && !formRef.current.contains(e.target)) {
@@ -26,7 +26,7 @@ export const FormDatails = ({ formRef, showForm, setshowForm, setData }) => {
     let userId = await getUser();
     if (!Source || !Amount || !date) return setError("All field should fill!.");
     try {
-      const res = await axios.post("http://localhost:8000/income/add-source", {
+      const res = await axios.post(`${pr}/income/add-source`, {
         userId,
         Source,
         Amount,

@@ -10,6 +10,7 @@ const Login = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [Error, setError] = useState("");
+  const pr = import.meta.env.REACT_APP_API_URL;
   const navigator = useNavigate();
   const handleLogin = (e) => {
     e.preventDefault();
@@ -18,7 +19,7 @@ const Login = () => {
     if (!Password) return setError("Please Enter A Password.");
 
     axios
-      .post("http://localhost:8000/auth/login", { Email, Password })
+      .post(`${pr}/auth/login`, { Email, Password })
       .then((response) => {
         console.log(response.data);
         alert(response.data.message);
@@ -38,7 +39,7 @@ const Login = () => {
   const handleGuestLogin = async (e) => {
     e.preventDefault();
     try {
-      const data = await axios.post("http://localhost:8000/auth/guest-login");
+      const data = await axios.post(`${pr}/auth/guest-login`);
       console.log(data);
 
       localStorage.setItem("token", data.data.token);

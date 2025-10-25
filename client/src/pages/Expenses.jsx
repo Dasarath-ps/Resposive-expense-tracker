@@ -19,16 +19,15 @@ const Expenses = () => {
   const formRef = useRef();
 
   //console.log(Data);
+  const pr = import.meta.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const getExpneses = async () => {
       try {
         const id = await getUser();
-        axios
-          .post("http://localhost:8000/expense/getallexpenses", { id })
-          .then((res) => {
-            setData(res.data.expenses);
-          });
+        axios.post(`${pr}/expense/getallexpenses`, { id }).then((res) => {
+          setData(res.data.expenses);
+        });
       } catch (error) {
         console.log(error);
       }
@@ -44,15 +43,12 @@ const Expenses = () => {
     }
 
     try {
-      const res = await axios.post(
-        "http://localhost:8000/expense/add-expense",
-        {
-          expenseSource,
-          dateOfExpense,
-          expenseAmount,
-          userId,
-        }
-      );
+      const res = await axios.post(`${pr}/expense/add-expense`, {
+        expenseSource,
+        dateOfExpense,
+        expenseAmount,
+        userId,
+      });
       // console.log(res.data);
       setdateOfExpense("");
       setexpenseAmount("");
@@ -73,7 +69,7 @@ const Expenses = () => {
       const userId = await getUser();
       console.log(userId);
 
-      const res = await axios.post("http://localhost:8000/expense/delete", {
+      const res = await axios.post("http:///expense/delete", {
         userId,
         element,
       });

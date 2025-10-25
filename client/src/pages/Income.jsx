@@ -11,7 +11,7 @@ const Income = () => {
   const [showForm, setshowForm] = useState(false);
   const [Data, setData] = useState([]);
   //const [total, settotal] = useState("");
-  const pr = import.meta.env.VITE_API_URL;
+  const pr = import.meta.env.REACT_APP_API_URL;
   //console.log(pr);
   useEffect(() => {
     const fetchIncomeData = async () => {
