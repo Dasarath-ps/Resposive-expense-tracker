@@ -1,7 +1,9 @@
 import axios from "axios";
-import { API_URL } from "../config.js";
+//import { API_URL } from "../config.js";
 
 export const getUser = async () => {
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   let token = localStorage.getItem("token");
   console.log(token);
   if (!token) {
@@ -10,7 +12,7 @@ export const getUser = async () => {
   }
 
   try {
-    const res = await axios.get(`${API_URL}/auth/login`, {
+    const res = await axios.get(`${apiUrl}/auth/login`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

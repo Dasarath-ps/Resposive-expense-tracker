@@ -7,11 +7,13 @@ import BarChart from "../components/Barchart.jsx";
 import { useRef } from "react";
 import IncomeResources from "../components/IncomeResources.jsx";
 import FormDatails from "../components/FormDetails.jsx";
-import { API_URL } from "../config.js";
+//import { API_URL } from "../config.js";
 
 const Income = () => {
   const [showForm, setshowForm] = useState(false);
   const [Data, setData] = useState([]);
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   //const [total, settotal] = useState("");
   useEffect(() => {
     const fetchIncomeData = async () => {
@@ -24,7 +26,7 @@ const Income = () => {
 
       let total;
       axios
-        .get(`${API_URL}/income/chart-data/${userId}`)
+        .get(`${apiUrl}/income/chart-data/${userId}`)
         .then((res) => {
           console.log(res.data);
           setData(res.data);

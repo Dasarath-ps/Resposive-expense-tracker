@@ -8,7 +8,7 @@ import axios from "axios";
 import { getUser } from "../helper.js/getUser";
 import { FaRegTrashAlt, FaTrashAlt } from "react-icons/fa";
 import image from "../assets/images/404.png";
-import { API_URL } from "../config.js";
+//import { API_URL } from "../config.js";
 
 const Expenses = () => {
   const [expenseSource, setexpenseSource] = useState("");
@@ -19,6 +19,7 @@ const Expenses = () => {
   const [Data, setData] = useState([]);
   const [highlight, sethighlight] = useState(false);
   const formRef = useRef();
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   //console.log(Data);
 
@@ -30,7 +31,7 @@ const Expenses = () => {
           console.error("No user ID available");
           return;
         }
-        axios.post(`${API_URL}/expense/getallexpenses`, { id }).then((res) => {
+        axios.post(`${apiUrl}/expense/getallexpenses`, { id }).then((res) => {
           setData(res.data?.expenses || []);
         });
       } catch (error) {
@@ -51,7 +52,7 @@ const Expenses = () => {
     }
 
     try {
-      const res = await axios.post(`${API_URL}/expense/add-expense`, {
+      const res = await axios.post(`${apiUrl}/expense/add-expense`, {
         expenseSource,
         dateOfExpense,
         expenseAmount,
@@ -81,7 +82,7 @@ const Expenses = () => {
       }
       console.log(userId);
 
-      const res = await axios.post(`${API_URL}/expense/delete`, {
+      const res = await axios.post(`${apiUrl}/expense/delete`, {
         userId,
         element,
       });
@@ -173,32 +174,33 @@ const Expenses = () => {
           </div>
           <h2 className="text-white">Expenses</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 bg-black overflow-hidden">
-            {Array.isArray(Data) && Data.map((element, index) => {
-              let formatedDate = new Date(element.date).toLocaleDateString();
+            {Array.isArray(Data) &&
+              Data.map((element, index) => {
+                let formatedDate = new Date(element.date).toLocaleDateString();
 
-              return (
-                <div
-                  key={element._id}
-                  className="group text-white flex justify-between items-center border-2 border-white rounded-xl mt-1 px-8 py-5  overflow-hidden bg-white/10 shadow-md shadow-white hover:shadow-none transition-all duration-300"
-                >
-                  <div className="left-section grid gap-2">
-                    <div>{element.expense}</div>
-                    <div>{formatedDate}</div>
-                  </div>
-                  <div className="flex justify-center items-center gap-6 ">
-                    <button onClick={() => deleteExpense(element, index)}>
-                      <div className="opacity-0 group-hover:opacity-100 w-10 h-10 rounded-full flex justify-center items-center bg-white text-red-500 transition-all duration-300 ease-in-out">
-                        <FaRegTrashAlt />
+                return (
+                  <div
+                    key={element._id}
+                    className="group text-white flex justify-between items-center border-2 border-white rounded-xl mt-1 px-8 py-5  overflow-hidden bg-white/10 shadow-md shadow-white hover:shadow-none transition-all duration-300"
+                  >
+                    <div className="left-section grid gap-2">
+                      <div>{element.expense}</div>
+                      <div>{formatedDate}</div>
+                    </div>
+                    <div className="flex justify-center items-center gap-6 ">
+                      <button onClick={() => deleteExpense(element, index)}>
+                        <div className="opacity-0 group-hover:opacity-100 w-10 h-10 rounded-full flex justify-center items-center bg-white text-red-500 transition-all duration-300 ease-in-out">
+                          <FaRegTrashAlt />
+                        </div>
+                      </button>
+                      <div className="right-section flex justify-between items-center gap-3 bg-red-600 p-1.5 rounded-lg w-20">
+                        <IoTrendingDownOutline />
+                        <div>{element.amount}</div>
                       </div>
-                    </button>
-                    <div className="right-section flex justify-between items-center gap-3 bg-red-600 p-1.5 rounded-lg w-20">
-                      <IoTrendingDownOutline />
-                      <div>{element.amount}</div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
         </div>
       ) : (

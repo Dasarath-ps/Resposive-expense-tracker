@@ -5,7 +5,7 @@ import Input from "../../components/Input";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import { API_URL } from "../../config.js";
+//import { API_URL } from "../../config.js";
 
 const Register = () => {
   const navigator = useNavigate();
@@ -19,8 +19,10 @@ const Register = () => {
     if (!Email) return setError("Please Enter Email");
     if (!validEmail(Email)) return setError("Please Enter A Valid Email");
     if (!Password) return setError("Please Enter A Password");
+    const apiUrl = import.meta.env.VITE_API_URL;
+
     axios
-      .post(`${API_URL}/auth/register`, {
+      .post(`${apiUrl}/auth/register`, {
         FullName,
         Email,
         Password,
@@ -36,7 +38,10 @@ const Register = () => {
         if (errorMessage === "User is already existed") {
           setError("User is already Registered - Go to login");
         } else {
-          setError(err.response?.data?.message || "Registration failed. Please try again.");
+          setError(
+            err.response?.data?.message ||
+              "Registration failed. Please try again."
+          );
         }
       });
   };

@@ -5,7 +5,7 @@ import { DollarSign, ArrowUpCircle, ArrowDownCircle } from "lucide-react";
 import { getUser } from "../helper.js/getUser";
 import axios from "axios";
 import CountUp from "react-countup";
-import { API_URL } from "../config.js";
+//import { API_URL } from "../config.js";
 
 const Dashboard = () => {
   // const { data, error, isLoading } = useGetAllProductsQuery();
@@ -27,6 +27,8 @@ const Dashboard = () => {
   const [income, setincome] = useState();
   useEffect(() => {
     const fetchIncomeData = async () => {
+      const apiUrl = import.meta.env.VITE_API_URL;
+
       let userId = await getUser();
       if (!userId) {
         console.error("No user ID available");
@@ -34,11 +36,13 @@ const Dashboard = () => {
       }
 
       axios
-        .get(`${API_URL}/income/chart-data/${userId}`)
+        .get(`${apiUrl}/income/chart-data/${userId}`)
         .then((res) => {
           //console.log(res.data);
 
-          const total = Array.isArray(res.data) ? res.data.reduce((sum, item) => sum + (item.amount || 0), 0) : 0;
+          const total = Array.isArray(res.data)
+            ? res.data.reduce((sum, item) => sum + (item.amount || 0), 0)
+            : 0;
           setincome(total);
         })
         .catch((err) => console.error(err));
@@ -54,12 +58,14 @@ const Dashboard = () => {
           return;
         }
 
-        axios.post(`${API_URL}/expense/getallexpenses`, { id }).then((res) => {
+        axios.post(`${apiUrl}/expense/getallexpenses`, { id }).then((res) => {
           console.log(res.data);
-          const total = Array.isArray(res.data?.expenses) ? res.data.expenses.reduce(
-            (sum, item) => sum + (item.amount || 0),
-            0
-          ) : 0;
+          const total = Array.isArray(res.data?.expenses)
+            ? res.data.expenses.reduce(
+                (sum, item) => sum + (item.amount || 0),
+                0
+              )
+            : 0;
           setexpense(total);
           console.log(total);
         });

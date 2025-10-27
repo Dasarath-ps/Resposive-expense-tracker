@@ -5,7 +5,7 @@ import { IoTrendingUpOutline } from "react-icons/io5";
 import { getUser } from "../helper.js/getUser";
 import { useNavigate } from "react-router-dom";
 import { downloadExcel } from "../helper.js/download";
-import { API_URL } from "../config.js";
+//import { API_URL } from "../config.js";
 
 const IncomeResources = ({ Data, setData, pageType, header, buttonText }) => {
   // console.log(pageType);
@@ -83,6 +83,8 @@ export default IncomeResources;
 
 const SourceData = ({ element, Data, setData, index }) => {
   const [highlight, setHighlight] = useState(false);
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   const date = element.date
     ? new Date(element.date).toLocaleDateString()
     : null;
@@ -94,7 +96,7 @@ const SourceData = ({ element, Data, setData, index }) => {
         console.error("No user ID available");
         return;
       }
-      const res = await axios.post(`${API_URL}/income/delete`, {
+      const res = await axios.post(`${apiUrl}/income/delete`, {
         element,
         userId,
       });
