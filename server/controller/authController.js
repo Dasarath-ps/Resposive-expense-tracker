@@ -6,6 +6,7 @@ export const generateToken = (id) => {
 export const userRegistration = async (req, res) => {
   //console.log(req.body);
   const { FullName, Email, Password } = req.body;
+
   if (!FullName || !Email || !Password) {
     return res.status(400).json({ message: "Not all input value Entered" });
   }
@@ -18,6 +19,7 @@ export const userRegistration = async (req, res) => {
       Email,
       Password,
     });
+    console.log(user);
     return res.status(201).json({ user, message: "Successfully Registered" });
   } catch (error) {
     return res.status(500).json({ message: error });

@@ -8,9 +8,9 @@ import CountUp from "react-countup";
 import PieChartApex from "../components/Pie";
 import IncomeResources from "../components/IncomeResources";
 import Loader from "../components/Loader"; // <-- your loading animation component
+import { API_URL } from "../config.js";
 
 const Demo = () => {
-  const pr = import.meta.env.VITE_REACT_APP_API_URL;
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
   const [Details, setDetails] = useState([]);
@@ -21,7 +21,7 @@ const Demo = () => {
       try {
         const userId = await getUser();
         // Fetch Income
-        const incomeRes = await axios.get(`${pr}/income/chart-data/${userId}`);
+        const incomeRes = await axios.get(`${API_URL}/income/chart-data/${userId}`);
         const totalIncome = incomeRes.data.reduce(
           (sum, item) => sum + item.amount,
           0
@@ -29,7 +29,7 @@ const Demo = () => {
         setIncome(totalIncome);
 
         // Fetch Expenses
-        const expenseRes = await axios.post(`${pr}/expense/getallexpenses`, {
+        const expenseRes = await axios.post(`${API_URL}/expense/getallexpenses`, {
           id: userId,
         });
         const totalExpense = expenseRes.data.expenses.reduce(
@@ -40,7 +40,7 @@ const Demo = () => {
 
         // Fetch All Details
         const detailsRes = await axios.post(
-          `${pr}/income/getAllDetail/${userId}`,
+          `${API_URL}/income/getAllDetail/${userId}`,
           { userId }
         );
         setDetails(detailsRes.data.data);

@@ -5,12 +5,13 @@ import { IoTrendingUpOutline } from "react-icons/io5";
 import { getUser } from "../helper.js/getUser";
 import { useNavigate } from "react-router-dom";
 import { downloadExcel } from "../helper.js/download";
+import { API_URL } from "../config.js";
+
 const IncomeResources = ({ Data, setData, pageType, header, buttonText }) => {
   // console.log(pageType);
   // console.log(header);
 
   console.log(Data);
-  const pr = import.meta.env.VITE_REACT_APP_API_URL;
   const navigate = useNavigate();
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -82,7 +83,6 @@ export default IncomeResources;
 
 const SourceData = ({ element, Data, setData, index }) => {
   const [highlight, setHighlight] = useState(false);
-  const pr = import.meta.env.VITE_REACT_APP_API_URL;
   const date = element.date
     ? new Date(element.date).toLocaleDateString()
     : null;
@@ -90,7 +90,7 @@ const SourceData = ({ element, Data, setData, index }) => {
   const deleteSource = async (element) => {
     try {
       const userId = await getUser();
-      const res = await axios.post(`${pr}/income/delete`, {
+      const res = await axios.post(`${API_URL}/income/delete`, {
         element,
         userId,
       });

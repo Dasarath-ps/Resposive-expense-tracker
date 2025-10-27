@@ -5,6 +5,8 @@ import { DollarSign, ArrowUpCircle, ArrowDownCircle } from "lucide-react";
 import { getUser } from "../helper.js/getUser";
 import axios from "axios";
 import CountUp from "react-countup";
+import { API_URL } from "../config.js";
+
 const Dashboard = () => {
   // const { data, error, isLoading } = useGetAllProductsQuery();
   // if (error) {
@@ -21,8 +23,6 @@ const Dashboard = () => {
   //     </div>
   //   );
   // }
-
-  const pr = import.meta.env.VITE_REACT_APP_API_URL;
   const [expense, setexpense] = useState([]);
   const [income, setincome] = useState();
   useEffect(() => {
@@ -30,7 +30,7 @@ const Dashboard = () => {
       let userId = await getUser();
 
       axios
-        .get(`${pr}/income/chart-data/${userId}`)
+        .get(`${API_URL}/income/chart-data/${userId}`)
         .then((res) => {
           //console.log(res.data);
 
@@ -46,7 +46,7 @@ const Dashboard = () => {
       try {
         const id = await getUser();
 
-        axios.post(`${pr}/expense/getallexpenses`, { id }).then((res) => {
+        axios.post(`${API_URL}/expense/getallexpenses`, { id }).then((res) => {
           console.log(res.data);
           const total = res.data.expenses.reduce(
             (sum, item) => sum + item.amount,

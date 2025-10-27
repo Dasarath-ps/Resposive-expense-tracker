@@ -67,7 +67,7 @@ export const getAllExpenses = async (req, res) => {
     //console.log(id);
     const expenses = await Expense.findOne({ userId: userId });
     //console.log(expenses.expenses);
-    return res.status(200).json({ expenses: expenses.expenses });
+    return res.status(200).json({ expenses: expenses ? expenses.expenses : [] });
   } catch (error) {
     return res.status(500).json({ Error: error });
   }

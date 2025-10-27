@@ -5,13 +5,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { validEmail } from "../../helper.js/validation";
 import axios from "axios";
 import { FaRegHandPointUp } from "react-icons/fa";
+import { API_URL } from "../../config.js";
 
 const Login = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [Error, setError] = useState("");
-  const pr = import.meta.env.vITE_REACT_APP_API_URL;
-  console.log(pr);
   const navigator = useNavigate();
   const handleLogin = (e) => {
     e.preventDefault();
@@ -20,7 +19,7 @@ const Login = () => {
     if (!Password) return setError("Please Enter A Password.");
 
     axios
-      .post(`${pr}/auth/login`, { Email, Password })
+      .post(`${API_URL}/auth/login`, { Email, Password })
       .then((response) => {
         console.log(response.data);
         alert(response.data.message);
@@ -40,7 +39,7 @@ const Login = () => {
   const handleGuestLogin = async (e) => {
     e.preventDefault();
     try {
-      const data = await axios.post(`${pr}/auth/guest-login`);
+      const data = await axios.post(`${API_URL}/auth/guest-login`);
       console.log(data);
 
       localStorage.setItem("token", data.data.token);
@@ -86,18 +85,18 @@ const Login = () => {
                   Sign Up
                 </span>
               </Link>
-              <div className="mt-6 flex flex-col items-center justify-center">
-                <button
-                  onClick={handleGuestLogin}
-                  className="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600 transition-all duration-200"
-                >
-                  Continue as Guest
-                </button>
-
-                {/* Animated pointing icon */}
-                <FaRegHandPointUp className="mt-3 text-primary-blue text-3xl animate-bounce" />
-              </div>
             </p>
+            <div className="mt-6 flex flex-col items-center justify-center">
+              <button
+                onClick={handleGuestLogin}
+                className="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600 transition-all duration-200"
+              >
+                Continue as Guest
+              </button>
+
+              {/* Animated pointing icon */}
+              <FaRegHandPointUp className="mt-3 text-primary-blue text-3xl animate-bounce" />
+            </div>
           </div>
         </form>
       </div>

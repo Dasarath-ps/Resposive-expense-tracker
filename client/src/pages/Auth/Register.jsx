@@ -5,21 +5,22 @@ import Input from "../../components/Input";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { API_URL } from "../../config.js";
+
 const Register = () => {
   const navigator = useNavigate();
   const [FullName, setFullName] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [Error, setError] = useState("");
-  const handleRegister = (e) => {
-    const pr = import.meta.env.VITE_REACT_APP_API_URL;
+  const handleRegister = async (e) => {
     e.preventDefault();
     if (!FullName) return setError("Please Enter Your Name");
     if (!Email) return setError("Please Enter Email");
     if (!validEmail(Email)) return setError("Please Enter A Valid Email");
     if (!Password) return setError("Please Enter A Password");
     axios
-      .post(`${pr}/auth/register`, {
+      .post(`${API_URL}/auth/register`, {
         FullName,
         Email,
         Password,

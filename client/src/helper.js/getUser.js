@@ -1,9 +1,10 @@
 import axios from "axios";
+import { API_URL } from "../config.js";
+
 export const getUser = async () => {
-  const pr = import.meta.env.VITE_REACT_APP_API_URL;
   let token = localStorage.getItem("token");
   try {
-    const res = await axios.get(`${pr}/auth/login`, {
+    const res = await axios.get(`${API_URL}/auth/login`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

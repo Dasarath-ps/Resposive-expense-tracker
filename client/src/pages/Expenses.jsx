@@ -8,6 +8,8 @@ import axios from "axios";
 import { getUser } from "../helper.js/getUser";
 import { FaRegTrashAlt, FaTrashAlt } from "react-icons/fa";
 import image from "../assets/images/404.png";
+import { API_URL } from "../config.js";
+
 const Expenses = () => {
   const [expenseSource, setexpenseSource] = useState("");
   const [dateOfExpense, setdateOfExpense] = useState("");
@@ -19,13 +21,12 @@ const Expenses = () => {
   const formRef = useRef();
 
   //console.log(Data);
-  const pr = import.meta.env.VITE_REACT_APP_API_URL;
 
   useEffect(() => {
     const getExpneses = async () => {
       try {
         const id = await getUser();
-        axios.post(`${pr}/expense/getallexpenses`, { id }).then((res) => {
+        axios.post(`${API_URL}/expense/getallexpenses`, { id }).then((res) => {
           setData(res.data.expenses);
         });
       } catch (error) {
@@ -43,7 +44,7 @@ const Expenses = () => {
     }
 
     try {
-      const res = await axios.post(`${pr}/expense/add-expense`, {
+      const res = await axios.post(`${API_URL}/expense/add-expense`, {
         expenseSource,
         dateOfExpense,
         expenseAmount,
