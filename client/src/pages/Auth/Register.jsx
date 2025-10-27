@@ -27,13 +27,16 @@ const Register = () => {
       })
       .then((res) => {
         console.log(res.data);
-        alert(res.data.message);
+        alert(res.data?.message || "Successfully Registered");
         navigator("/");
       })
       .catch((err) => {
         console.log(err);
-        if (err.response.data.message === "User is already existed") {
-          setError("User is already Registered " + "Go to login");
+        const errorMessage = err.response?.data?.message;
+        if (errorMessage === "User is already existed") {
+          setError("User is already Registered - Go to login");
+        } else {
+          setError(err.response?.data?.message || "Registration failed. Please try again.");
         }
       });
   };

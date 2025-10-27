@@ -20,22 +20,27 @@ const Demo = () => {
     const fetchData = async () => {
       try {
         const userId = await getUser();
+        if (!userId) {
+          console.error("No user ID available");
+          setLoading(false);
+          return;
+        }
         // Fetch Income
         const incomeRes = await axios.get(`${API_URL}/income/chart-data/${userId}`);
-        const totalIncome = incomeRes.data.reduce(
-          (sum, item) => sum + item.amount,
+        const totalIncome = Array.isArray(incomeRes.data) ? incomeRes.data.reduce(
+          (sum, item) => sum + (item.amount || 0),
           0
-        );
+        ) : 0;
         setIncome(totalIncome);
 
         // Fetch Expenses
         const expenseRes = await axios.post(`${API_URL}/expense/getallexpenses`, {
           id: userId,
         });
-        const totalExpense = expenseRes.data.expenses.reduce(
-          (sum, item) => sum + item.amount,
+        const totalExpense = Array.isArray(expenseRes.data?.expenses) ? expenseRes.data.expenses.reduce(
+          (sum, item) => sum + (item.amount || 0),
           0
-        );
+        ) : 0;
         setExpense(totalExpense);
 
         // Fetch All Details
@@ -43,7 +48,7 @@ const Demo = () => {
           `${API_URL}/income/getAllDetail/${userId}`,
           { userId }
         );
-        setDetails(detailsRes.data.data);
+        setDetails(detailsRes.data?.data || []);
       } catch (err) {
         console.error(err);
       } finally {
@@ -77,8 +82,8 @@ const Demo = () => {
     },
   ];
 
-  const filteredExpense = Details.filter((item) => item.type === "expense");
-  const filteredIncome = Details.filter((item) => item.type === "income");
+  const filteredExpense = Array.isArray(Details) ? Details.filter((item) => item.type === "expense") : [];
+  const filteredIncome = Array.isArray(Details) ? Details.filter((item) => item.type === "income") : [];
 
   // ✅ Show loader if still loading
   if (loading) {

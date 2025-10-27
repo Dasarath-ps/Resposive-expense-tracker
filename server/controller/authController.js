@@ -22,7 +22,7 @@ export const userRegistration = async (req, res) => {
     console.log(user);
     return res.status(201).json({ user, message: "Successfully Registered" });
   } catch (error) {
-    return res.status(500).json({ message: error });
+    return res.status(500).json({ message: error.message || "Registration failed" });
   }
 };
 export const userLogin = async (req, res) => {
@@ -47,7 +47,7 @@ export const userLogin = async (req, res) => {
       message: "Login Successfully.",
     });
   } catch (error) {
-    res.status(500).json({ error, message: "Catch Error" });
+    res.status(500).json({ error: error.message, message: "Catch Error" });
   }
 };
 
@@ -77,6 +77,6 @@ export const getUser = async (req, res, next) => {
       return next();
     }
   } catch (error) {
-    return res.status(500).json({ message: "Error", error });
+    return res.status(500).json({ message: "Error", error: error.message });
   }
 };

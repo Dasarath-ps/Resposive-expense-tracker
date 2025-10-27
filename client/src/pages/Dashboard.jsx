@@ -28,13 +28,17 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchIncomeData = async () => {
       let userId = await getUser();
+      if (!userId) {
+        console.error("No user ID available");
+        return;
+      }
 
       axios
         .get(`${API_URL}/income/chart-data/${userId}`)
         .then((res) => {
           //console.log(res.data);
 
-          const total = res.data.reduce((sum, item) => sum + item.amount, 0);
+          const total = Array.isArray(res.data) ? res.data.reduce((sum, item) => sum + (item.amount || 0), 0) : 0;
           setincome(total);
         })
         .catch((err) => console.error(err));
@@ -45,13 +49,17 @@ const Dashboard = () => {
     const getExpneses = async () => {
       try {
         const id = await getUser();
+        if (!id) {
+          console.error("No user ID available");
+          return;
+        }
 
         axios.post(`${API_URL}/expense/getallexpenses`, { id }).then((res) => {
           console.log(res.data);
-          const total = res.data.expenses.reduce(
-            (sum, item) => sum + item.amount,
+          const total = Array.isArray(res.data?.expenses) ? res.data.expenses.reduce(
+            (sum, item) => sum + (item.amount || 0),
             0
-          );
+          ) : 0;
           setexpense(total);
           console.log(total);
         });

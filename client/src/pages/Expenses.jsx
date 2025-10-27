@@ -26,8 +26,12 @@ const Expenses = () => {
     const getExpneses = async () => {
       try {
         const id = await getUser();
+        if (!id) {
+          console.error("No user ID available");
+          return;
+        }
         axios.post(`${API_URL}/expense/getallexpenses`, { id }).then((res) => {
-          setData(res.data.expenses);
+          setData(res.data?.expenses || []);
         });
       } catch (error) {
         console.log(error);
@@ -39,6 +43,9 @@ const Expenses = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userId = await getUser();
+    if (!userId) {
+      return seterror("User not authenticated. Please login again.");
+    }
     if (!expenseSource || !dateOfExpense || !expenseAmount) {
       return seterror("All field are Required...");
     }
@@ -68,9 +75,13 @@ const Expenses = () => {
     //e.preventDefault();
     try {
       const userId = await getUser();
+      if (!userId) {
+        console.error("No user ID available");
+        return;
+      }
       console.log(userId);
 
-      const res = await axios.post("http:///expense/delete", {
+      const res = await axios.post(`${API_URL}/expense/delete`, {
         userId,
         element,
       });
@@ -162,7 +173,7 @@ const Expenses = () => {
           </div>
           <h2 className="text-white">Expenses</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 bg-black overflow-hidden">
-            {Data.map((element, index) => {
+            {Array.isArray(Data) && Data.map((element, index) => {
               let formatedDate = new Date(element.date).toLocaleDateString();
 
               return (

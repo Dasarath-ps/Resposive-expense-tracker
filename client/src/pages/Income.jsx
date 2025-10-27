@@ -16,6 +16,11 @@ const Income = () => {
   useEffect(() => {
     const fetchIncomeData = async () => {
       let userId = await getUser();
+      console.log(userId);
+      if (!userId) {
+        console.error("No user ID available");
+        return;
+      }
 
       let total;
       axios

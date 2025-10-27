@@ -59,7 +59,7 @@ const IncomeResources = ({ Data, setData, pageType, header, buttonText }) => {
             : "grid-cols-1 sm:grid-cols-2 gap-5"
         } w-full h-[60vh] p-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent`}
       >
-        {Data && Data.length > 0 ? (
+        {Array.isArray(Data) && Data.length > 0 ? (
           Data.map((element, index) => (
             <SourceData
               key={index}
@@ -90,6 +90,10 @@ const SourceData = ({ element, Data, setData, index }) => {
   const deleteSource = async (element) => {
     try {
       const userId = await getUser();
+      if (!userId) {
+        console.error("No user ID available");
+        return;
+      }
       const res = await axios.post(`${API_URL}/income/delete`, {
         element,
         userId,
