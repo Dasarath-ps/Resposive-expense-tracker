@@ -5,13 +5,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { validEmail } from "../../helper.js/validation";
 import axios from "axios";
 import { FaRegHandPointUp } from "react-icons/fa";
-import { API_URL } from "../../config.js";
 
 const Login = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [Error, setError] = useState("");
   const navigator = useNavigate();
+  const apiUrl = import.meta.env.VITE_API_URL;
   const handleLogin = (e) => {
     e.preventDefault();
     if (!Email) return setError("Please Enter Your Email.");
@@ -19,7 +19,7 @@ const Login = () => {
     if (!Password) return setError("Please Enter A Password.");
 
     axios
-      .post(`${API_URL}/auth/login`, { Email, Password })
+      .post(`${apiUrl}/auth/login`, { Email, Password })
       .then((response) => {
         console.log(response.data);
         alert(response.data.message);
@@ -39,7 +39,7 @@ const Login = () => {
   const handleGuestLogin = async (e) => {
     e.preventDefault();
     try {
-      const data = await axios.post(`${API_URL}/auth/guest-login`);
+      const data = await axios.post(`${apiUrl}/auth/guest-login`);
       console.log(data);
 
       localStorage.setItem("token", data.data.token);
