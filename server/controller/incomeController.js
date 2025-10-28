@@ -53,11 +53,11 @@ export const getIncomeDate = async (req, res) => {
     const { userId } = req.params;
     if (userId.startsWith("guest_")) {
       return res.json([
-        { source: "Rent", amount: 2000, date: "2025-01-01" },
-        { source: "Freelance on MERN", amount: 3000, date: "2025-02-01" },
-        { source: "Product Sail", amount: 6000, date: "2025-03-01" },
+        { source: "Rent", amount: 10000, date: "2025-01-01" },
+        { source: "Freelance on MERN", amount: 15000, date: "2025-02-01" },
+        { source: "Product Sail", amount: 18000, date: "2025-03-01" },
         { source: "Salary", amount: 26000, date: "2025-03-01" },
-        { source: "Divident", amount: 6000, date: "2025-03-01" },
+        { source: "Divident", amount: 10000, date: "2025-03-01" },
       ]);
     }
     const id = new mongoose.Types.ObjectId(userId);
