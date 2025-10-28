@@ -56,6 +56,8 @@ export const getAllExpenses = async (req, res) => {
       return res.json({
         expenses: [
           { expense: "Food", amount: 500, date: "2025-01-15" },
+          { expense: "Tution Fee", amount: 1200, date: "2025-01-25" },
+          { expense: "Book", amount: 500, date: "2025-01-15" },
           { expense: "Travel", amount: 1200, date: "2025-01-20" },
           { expense: "Employee Salary", amount: 2000, date: "2025-02-20" },
         ],
@@ -67,7 +69,9 @@ export const getAllExpenses = async (req, res) => {
     //console.log(id);
     const expenses = await Expense.findOne({ userId: userId });
     //console.log(expenses.expenses);
-    return res.status(200).json({ expenses: expenses ? expenses.expenses : [] });
+    return res
+      .status(200)
+      .json({ expenses: expenses ? expenses.expenses : [] });
   } catch (error) {
     return res.status(500).json({ Error: error });
   }
