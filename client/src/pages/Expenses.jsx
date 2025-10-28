@@ -7,6 +7,8 @@ import LineBar from "../components/LineBar";
 import axios from "axios";
 import { getUser } from "../helper.js/getUser";
 import { FaRegTrashAlt, FaTrashAlt } from "react-icons/fa";
+import Loader from "../components/Loader"; // <-- your loading animation component
+
 import image from "../assets/images/404.png";
 //import { API_URL } from "../config.js";
 
@@ -96,16 +98,16 @@ const Expenses = () => {
   if (!Array.isArray(Data) || Data.length == 0) {
     return (
       <Container>
-        <div className="flex flex-col h-[calc(100vh-40px)] items-center justify-center overflow-hidden bg-background ">
-          <h3 className="text-white text-2xl">No Data Available</h3>
-          <img className="max-w-60 max-h-60" src={image} alt="" />
-          <button
-            onClick={() => setShowForm(true)}
-            className="px-2 py-2 bg-primary-blue text-white text-md rounded-lg absolute right-0 top-20"
-          >
-            + Expense
-          </button>
+        <div className="flex flex-col h-[calc(100vh-40px)] items-center justify-center">
+          <Loader /> {/* Your loading spinner/animation component */}
+          <p className="text-white mt-4">Loading data...</p>
         </div>
+        <button
+          onClick={() => setShowForm(true)}
+          className="px-2 py-2 bg-primary-blue text-white text-md rounded-lg absolute right-0 top-20"
+        >
+          + Expense
+        </button>
       </Container>
     );
   }

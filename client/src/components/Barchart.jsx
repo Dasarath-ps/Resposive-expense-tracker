@@ -2,17 +2,20 @@ import React from "react";
 import image from "../assets/images/404.png";
 import Chart from "react-apexcharts";
 import { ButtonForAdd } from "../pages/Income";
+import Loader from "../components/Loader"; // <-- your loading animation component
 
 const Barchart = ({ Data, setshowForm }) => {
   console.log(Data);
 
   if (!Array.isArray(Data) || Data.length == 0) {
     return (
-      <div className="flex flex-col h-[calc(100vh-40px)] items-center justify-center overflow-hidden bg-background z-200">
-        <h3 className="text-white text-2xl">No Data Available</h3>
-        <img className="max-w-60 max-h-60" src={image} alt="" />
+      <Container>
+        <div className="flex flex-col h-[calc(100vh-40px)] items-center justify-center">
+          <Loader /> {/* Your loading spinner/animation component */}
+          <p className="text-white mt-4">Loading data...</p>
+        </div>
         <ButtonForAdd setshowForm={setshowForm} />
-      </div>
+      </Container>
     );
   }
   const hasTypeField = Data.some((item) => item.type);
