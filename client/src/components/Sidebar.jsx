@@ -24,7 +24,7 @@ const Sidebar = ({ ShowSidebar, setShowSidebar }) => {
   const clear = (e) => {
     //e.preventDefault();
     localStorage.clear();
-    navigator("/");
+    navigator("/login");
   };
   return (
     <div
