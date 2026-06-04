@@ -3,7 +3,7 @@ import image from "../assets/images/404.png";
 import Chart from "react-apexcharts";
 import { ButtonForAdd } from "../pages/Income";
 import Loader from "../components/Loader"; // <-- your loading animation component
-
+import Container from "./layout/Container";
 const Barchart = ({ Data, setshowForm }) => {
   console.log(Data);
 

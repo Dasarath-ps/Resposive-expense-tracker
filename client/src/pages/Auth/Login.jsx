@@ -88,6 +88,7 @@ const Login = () => {
             </p>
             <div className="mt-6 flex flex-col items-center justify-center">
               <button
+                type="button"
                 onClick={handleGuestLogin}
                 className="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600 transition-all duration-200"
               >
