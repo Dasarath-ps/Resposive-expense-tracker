@@ -1,7 +1,7 @@
 import User from "../models/User.js";
 import jsonwebtoken from "jsonwebtoken";
 export const generateToken = (id) => {
-  return jsonwebtoken.sign({ id }, process.env.JWT_KEY, { expiresIn: "2d" });
+  return jsonwebtoken.sign({ id }, process.env.JWT_KEY, { expiresIn: "7d" });
 };
 export const userRegistration = async (req, res) => {
   //console.log(req.body);
@@ -22,7 +22,9 @@ export const userRegistration = async (req, res) => {
     console.log(user);
     return res.status(201).json({ user, message: "Successfully Registered" });
   } catch (error) {
-    return res.status(500).json({ message: error.message || "Registration failed" });
+    return res
+      .status(500)
+      .json({ message: error.message || "Registration failed" });
   }
 };
 export const userLogin = async (req, res) => {
