@@ -40,7 +40,7 @@ const Register = () => {
         } else {
           setError(
             err.response?.data?.message ||
-              "Registration failed. Please try again."
+            "Registration failed. Please try again."
           );
         }
       });
@@ -85,7 +85,7 @@ const Register = () => {
             <p className="text-white">
               Already have a Account ?
               <span
-                onClick={() => navigator("/")}
+                onClick={() => navigator("/login")}
                 className="text-primary-blue hove:text-blue-700 hover:underline"
               >
                 login
