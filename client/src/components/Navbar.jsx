@@ -1,8 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { MdMenuOpen } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
 
 const Navbar = ({ setShowSidebar }) => {
+  const [showPopUp, setShowPopUp] = React.useState(false);
   const handleSidebar = () => {
     setShowSidebar((prev) => !prev);
   };
@@ -14,11 +16,40 @@ const Navbar = ({ setShowSidebar }) => {
       >
         <MdMenuOpen />
       </div>
-      <div className="flex items-center justify-center w-15 h-15 rounded-full text-5xl text-white">
+      <button className="flex items-center justify-center w-15 h-15 rounded-full text-5xl text-white"
+        onClick={() => setShowPopUp(!showPopUp)}
+      >
         <FaUserCircle />
-      </div>
+      </button>
+      {showPopUp && <PopUp setShowPopUp={setShowPopUp} />}
     </div>
   );
 };
 
 export default Navbar;
+
+const PopUp = ({ setShowPopUp }) => {
+  const navigator = useNavigate();
+  return (
+    <div className="absolute top-16 right-2 bg-white rounded-lg shadow-lg p-4 z-50">
+
+
+      <ul>
+        <li className="mb-1">
+          <button href="/profile" className="text-blue-500 hover:bg-blue-100 hover:text-2xl transition-all duration-300 hover:rounded-md"
+            onClick={() => navigator("/login")}
+          >
+            Sign In
+          </button>
+        </li>
+        <li className="mb-1">
+          <button href="/settings" className="text-blue-500 hover:bg-blue-100 hover:text-2xl transition-all duration-300 hover:rounded-md"
+            onClick={() => navigator("/register")}
+          >
+            Sign Up
+          </button>
+        </li>
+      </ul>
+    </div>
+  );
+};
